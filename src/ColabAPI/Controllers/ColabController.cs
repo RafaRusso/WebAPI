@@ -1,21 +1,28 @@
-﻿using ColabAPI.Models;
+﻿using Dominio.Models;
+using Repositorio.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ColabAPI.Controllers
+namespace Dominio.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ColabController : ControllerBase
     {
-        public static List<Colab> lista = new List<Colab>();
+        private readonly ColabDBContext _context;
+
+        public ColabController(ColabDBContext context)
+        {
+            _context = context;
+        }
 
         //Método Get
         [HttpGet]
-        public List<Colab> GetGrupo()
+        public List<Colab> GetColabs()
         {
+            List<Colab> lista = _context.Colabs.ToList();
             return lista;
         }
 
@@ -23,27 +30,54 @@ namespace ColabAPI.Controllers
         [HttpPost]
         public string PostColab(Colab colab)
         {
-            lista.Add(colab);
-            return "Cadastro!";
+            _context.Colabs.Add(colab);
+
+            int valor = _context.SaveChanges();
+
+            if (valor > 0)
+            {
+                return "Cadastrado com sucesso!";
+            }
+            else
+            {
+                return "Error!";
+            }
         }
 
         //Método Put
         [HttpPut]
         public string PutColab(Colab colab)
         {
-            Colab colabAux = lista.Where(x => x.Id == colab.Id).FirstOrDefault();
-            colabAux.Name = colab.Name;
-            colabAux.Email = colab.Email;
-            return "Colaborador atualizado!";
+            _context.Colabs.Update(colab);
+
+            int valor = _context.SaveChanges();
+
+            if (valor > 0)
+            {
+                return "Alterado com sucesso!";
+            }
+            else
+            {
+                return "Error!";
+            }
         }
 
         //Método Delete
         [HttpDelete]
         public string DeleteColab(Colab colab)
         {
-            Colab colabAux = lista.Where(x => x.Id == colab.Id).FirstOrDefault();
-            lista.Remove(colabAux);
-            return "Colaborador excluido!";
+            _context.Colabs.Remove(colab);
+
+            int valor = _context.SaveChanges();
+
+            if (valor > 0)
+            {
+                return "Excluido com sucesso!";
+            }
+            else
+            {
+                return "Error!";
+            }
         }
     }
 }
