@@ -100,17 +100,23 @@ namespace Repositorio.Migrations
 
             modelBuilder.Entity("Dominio.Models.Colab", b =>
                 {
-                    b.HasOne("Dominio.Models.Departamento", "Departamento")
-                        .WithMany()
+                    b.HasOne("Dominio.Models.Departamento", null)
+                        .WithMany("Colaboradores")
                         .HasForeignKey("DepartamentoId");
 
-                    b.HasOne("Dominio.Models.Grupo", "Grupo")
-                        .WithMany()
+                    b.HasOne("Dominio.Models.Grupo", null)
+                        .WithMany("Colaboradores")
                         .HasForeignKey("GrupoId");
+                });
 
-                    b.Navigation("Departamento");
+            modelBuilder.Entity("Dominio.Models.Departamento", b =>
+                {
+                    b.Navigation("Colaboradores");
+                });
 
-                    b.Navigation("Grupo");
+            modelBuilder.Entity("Dominio.Models.Grupo", b =>
+                {
+                    b.Navigation("Colaboradores");
                 });
 #pragma warning restore 612, 618
         }

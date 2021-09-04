@@ -18,10 +18,10 @@ namespace Dominio.Models
         public string Idade { get; set; }
         public string Senha { get; set; }
         public string Status { get; set; }
-        public int DepartamentoColab { get; set; }
+        public int DepartamentoId { get; set; }
         //Relacionamento Dep-Colab
         public Departamento Departamento { get; set; }
-        public int GrupoColab { get; set; }
+        public int GrupoId { get; set; }
         //Relacionamento Grupo-Colab
         public Grupo Grupo { get; set; }
         public string SocialMedia { get; set; }
