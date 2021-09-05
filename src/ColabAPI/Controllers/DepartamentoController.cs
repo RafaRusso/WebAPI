@@ -1,6 +1,7 @@
 ﻿using Dominio.Models;
-using Repositorio.Data;
 using Microsoft.AspNetCore.Mvc;
+using Repositorio.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,28 +10,28 @@ namespace ColabAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColabController : ControllerBase
+    public class DepartamentoController : Controller
     {
         private readonly ColabDBContext _context;
 
-        public ColabController(ColabDBContext context)
+        public DepartamentoController(ColabDBContext context)
         {
             _context = context;
         }
 
         //Método Get
         [HttpGet]
-        public List<Colab> GetColabs()
+        public List<Departamento> GetDepartamentos()
         {
-            List<Colab> lista = _context.Colabs.ToList();
+            List<Departamento> lista = _context.Departamentos.ToList();
             return lista;
         }
 
         //Método Post
         [HttpPost]
-        public string PostColab(Colab colab)
+        public string PostDepartamento(Departamento departamento)
         {
-            _context.Colabs.Add(colab);
+            _context.Departamentos.Add(departamento);
 
             int valor = _context.SaveChanges();
 
@@ -46,9 +47,9 @@ namespace ColabAPI.Controllers
 
         //Método Put
         [HttpPut]
-        public string PutColab(Colab colab)
+        public string PutDepartamento(Departamento departamento)
         {
-            _context.Colabs.Update(colab);
+            _context.Departamentos.Update(departamento);
 
             int valor = _context.SaveChanges();
 
@@ -64,9 +65,9 @@ namespace ColabAPI.Controllers
 
         //Método Delete
         [HttpDelete]
-        public string DeleteColab(Colab colab)
+        public string DeleteDepartamento(Departamento departamento)
         {
-            _context.Colabs.Remove(colab);
+            _context.Departamentos.Remove(departamento);
 
             int valor = _context.SaveChanges();
 
@@ -81,3 +82,4 @@ namespace ColabAPI.Controllers
         }
     }
 }
+

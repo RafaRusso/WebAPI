@@ -1,6 +1,7 @@
 ﻿using Dominio.Models;
-using Repositorio.Data;
 using Microsoft.AspNetCore.Mvc;
+using Repositorio.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,28 +10,28 @@ namespace ColabAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColabController : ControllerBase
+    public class GrupoController : Controller
     {
         private readonly ColabDBContext _context;
 
-        public ColabController(ColabDBContext context)
+        public GrupoController(ColabDBContext context)
         {
             _context = context;
         }
 
         //Método Get
         [HttpGet]
-        public List<Colab> GetColabs()
+        public List<Grupo> GetGrupos()
         {
-            List<Colab> lista = _context.Colabs.ToList();
+            List<Grupo> lista = _context.Grupos.ToList();
             return lista;
         }
 
         //Método Post
         [HttpPost]
-        public string PostColab(Colab colab)
+        public string PostGrupo(Grupo grupo)
         {
-            _context.Colabs.Add(colab);
+            _context.Grupos.Add(grupo);
 
             int valor = _context.SaveChanges();
 
@@ -46,9 +47,9 @@ namespace ColabAPI.Controllers
 
         //Método Put
         [HttpPut]
-        public string PutColab(Colab colab)
+        public string PutGrupo(Grupo grupo)
         {
-            _context.Colabs.Update(colab);
+            _context.Grupos.Update(grupo);
 
             int valor = _context.SaveChanges();
 
@@ -64,9 +65,9 @@ namespace ColabAPI.Controllers
 
         //Método Delete
         [HttpDelete]
-        public string DeleteColab(Colab colab)
+        public string DeleteGrupo(Grupo grupo)
         {
-            _context.Colabs.Remove(colab);
+            _context.Grupos.Remove(grupo);
 
             int valor = _context.SaveChanges();
 
