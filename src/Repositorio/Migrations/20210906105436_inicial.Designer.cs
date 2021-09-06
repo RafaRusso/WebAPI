@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Repositorio.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(ColabDBContext))]
-    [Migration("20210906070438_teste")]
-    partial class teste
+    [Migration("20210906105436_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,36 @@ namespace Repositorio.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("ColabDepartamento", b =>
+                {
+                    b.Property<int>("ColaboradoresId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DepartamentosId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ColaboradoresId", "DepartamentosId");
+
+                    b.HasIndex("DepartamentosId");
+
+                    b.ToTable("ColabDepartamento");
+                });
+
+            modelBuilder.Entity("ColabGrupo", b =>
+                {
+                    b.Property<int>("ColaboradoresId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("GruposId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ColaboradoresId", "GruposId");
+
+                    b.HasIndex("GruposId");
+
+                    b.ToTable("ColabGrupo");
+                });
+
             modelBuilder.Entity("Core.Domain.Colab", b =>
                 {
                     b.Property<int>("Id")
@@ -27,17 +57,11 @@ namespace Repositorio.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("DepartamentoId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Descricao")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
-
-                    b.Property<int>("GrupoId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("Idade")
                         .HasColumnType("integer");
@@ -87,6 +111,36 @@ namespace Repositorio.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grupos");
+                });
+
+            modelBuilder.Entity("ColabDepartamento", b =>
+                {
+                    b.HasOne("Core.Domain.Colab", null)
+                        .WithMany()
+                        .HasForeignKey("ColaboradoresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Domain.Departamento", null)
+                        .WithMany()
+                        .HasForeignKey("DepartamentosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ColabGrupo", b =>
+                {
+                    b.HasOne("Core.Domain.Colab", null)
+                        .WithMany()
+                        .HasForeignKey("ColaboradoresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Domain.Grupo", null)
+                        .WithMany()
+                        .HasForeignKey("GruposId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

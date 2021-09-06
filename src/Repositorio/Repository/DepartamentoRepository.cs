@@ -54,5 +54,10 @@ namespace Data.Repository
             context.Departamentos.Remove(departamentoConsultado);
             await context.SaveChangesAsync();
         }
+
+        public async Task<bool> ExisteAsync(int id)
+        {
+            return await context.Departamentos.AnyAsync(p => p.Id == id);
+        }
     }
 }

@@ -19,6 +19,7 @@ using FluentValidation.AspNetCore;
 using Manager.Validator;
 using System.Globalization;
 using ColabAPI.Configuration;
+using System.Text.Json.Serialization;
 
 namespace Dominio
 {
@@ -34,7 +35,7 @@ namespace Dominio
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddControllers();
             services.AddFluentValidationConfiguration();
             services.AddDataBaseConfiguration(Configuration);

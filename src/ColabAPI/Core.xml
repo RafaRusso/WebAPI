@@ -39,14 +39,14 @@
             Status:
             </summary>
         </member>
-        <member name="P:Core.Domain.Colab.DepartamentoId">
+        <member name="P:Core.Domain.Colab.Departamentos">
             <summary>
-            ID do departamento que o colaborador participa:
+            ID do departamento que o colaborador participa
             </summary>
         </member>
-        <member name="P:Core.Domain.Colab.GrupoId">
+        <member name="P:Core.Domain.Colab.Grupos">
             <summary>
-            ID do grupo que o colaborador participa:
+            ID do grupo que o colaborador participa
             </summary>
         </member>
         <member name="P:Core.Domain.Colab.SocialMedia">

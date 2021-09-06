@@ -2,51 +2,23 @@
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(ColabDBContext))]
-    partial class ColabDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210906111054_new-test")]
+    partial class newtest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("ColabDepartamento", b =>
-                {
-                    b.Property<int>("ColaboradoresId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("DepartamentosId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ColaboradoresId", "DepartamentosId");
-
-                    b.HasIndex("DepartamentosId");
-
-                    b.ToTable("ColabDepartamento");
-                });
-
-            modelBuilder.Entity("ColabGrupo", b =>
-                {
-                    b.Property<int>("ColaboradoresId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("GruposId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ColaboradoresId", "GruposId");
-
-                    b.HasIndex("GruposId");
-
-                    b.ToTable("ColabGrupo");
-                });
 
             modelBuilder.Entity("Core.Domain.Colab", b =>
                 {
@@ -109,36 +81,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grupos");
-                });
-
-            modelBuilder.Entity("ColabDepartamento", b =>
-                {
-                    b.HasOne("Core.Domain.Colab", null)
-                        .WithMany()
-                        .HasForeignKey("ColaboradoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Domain.Departamento", null)
-                        .WithMany()
-                        .HasForeignKey("DepartamentosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ColabGrupo", b =>
-                {
-                    b.HasOne("Core.Domain.Colab", null)
-                        .WithMany()
-                        .HasForeignKey("ColaboradoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Domain.Grupo", null)
-                        .WithMany()
-                        .HasForeignKey("GruposId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

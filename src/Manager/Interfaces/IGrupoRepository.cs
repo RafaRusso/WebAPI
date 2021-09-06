@@ -9,6 +9,7 @@ namespace Manager.Interfaces
 {
     public interface IGrupoRepository
     {
+        Task<bool> ExisteAsync(int id);
         Task DeleteGrupoAsync(int id);
         Task<Grupo> GetGrupoAsync(int id);
         Task<IEnumerable<Grupo>> GetGruposAsync();

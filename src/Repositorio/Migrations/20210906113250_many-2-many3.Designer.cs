@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Repositorio.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(ColabDBContext))]
-    [Migration("20210906050926_idade")]
-    partial class idade
+    [Migration("20210906113250_many-2-many3")]
+    partial class many2many3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,36 @@ namespace Repositorio.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("ColabDepartamento", b =>
+                {
+                    b.Property<int>("ColaboradoresId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DepartamentosId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ColaboradoresId", "DepartamentosId");
+
+                    b.HasIndex("DepartamentosId");
+
+                    b.ToTable("ColabDepartamento");
+                });
+
+            modelBuilder.Entity("ColabGrupo", b =>
+                {
+                    b.Property<int>("ColaboradoresId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("GruposId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ColaboradoresId", "GruposId");
+
+                    b.HasIndex("GruposId");
+
+                    b.ToTable("ColabGrupo");
+                });
+
             modelBuilder.Entity("Core.Domain.Colab", b =>
                 {
                     b.Property<int>("Id")
@@ -27,17 +57,11 @@ namespace Repositorio.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("DepartamentoId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Descricao")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
-
-                    b.Property<int>("GrupoId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("Idade")
                         .HasColumnType("integer");
@@ -54,14 +78,7 @@ namespace Repositorio.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("text");
 
-                    b.Property<int>("test")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartamentoId");
-
-                    b.HasIndex("GrupoId");
 
                     b.ToTable("Colabs");
                 });
@@ -96,33 +113,34 @@ namespace Repositorio.Migrations
                     b.ToTable("Grupos");
                 });
 
-            modelBuilder.Entity("Core.Domain.Colab", b =>
+            modelBuilder.Entity("ColabDepartamento", b =>
                 {
-                    b.HasOne("Core.Domain.Departamento", "Departamento")
-                        .WithMany("Colaboradores")
-                        .HasForeignKey("DepartamentoId")
+                    b.HasOne("Core.Domain.Colab", null)
+                        .WithMany()
+                        .HasForeignKey("ColaboradoresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Domain.Grupo", "Grupo")
-                        .WithMany("Colaboradores")
-                        .HasForeignKey("GrupoId")
+                    b.HasOne("Core.Domain.Departamento", null)
+                        .WithMany()
+                        .HasForeignKey("DepartamentosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ColabGrupo", b =>
+                {
+                    b.HasOne("Core.Domain.Colab", null)
+                        .WithMany()
+                        .HasForeignKey("ColaboradoresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Departamento");
-
-                    b.Navigation("Grupo");
-                });
-
-            modelBuilder.Entity("Core.Domain.Departamento", b =>
-                {
-                    b.Navigation("Colaboradores");
-                });
-
-            modelBuilder.Entity("Core.Domain.Grupo", b =>
-                {
-                    b.Navigation("Colaboradores");
+                    b.HasOne("Core.Domain.Grupo", null)
+                        .WithMany()
+                        .HasForeignKey("GruposId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

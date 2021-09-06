@@ -54,5 +54,10 @@ namespace Data.Repository
             context.Grupos.Remove(grupoConsultado);
             await context.SaveChangesAsync();
         }
+
+        public async Task<bool> ExisteAsync(int id)
+        {
+            return await context.Grupos.AnyAsync(p => p.Id == id);
+        }
     }
 }

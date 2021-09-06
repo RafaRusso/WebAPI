@@ -34,19 +34,21 @@ namespace Data.Repository
             await context.SaveChangesAsync();
             return colab;
         }
+
+        
         //update
         public async Task<Colab> UpdateColabAsync(Colab colab)
         {
-            var colabConsultado = await context.Colabs.FindAsync(colab.Id);
+            var colabConsultado = await context.Colabs.SingleOrDefaultAsync(p => p.Id == colab.Id);
             if (colabConsultado == null)
             {
                 return null;
             }
             context.Entry(colabConsultado).CurrentValues.SetValues(colab);
-
             await context.SaveChangesAsync();
             return colabConsultado;
         }
+        
         //delete
         public async Task DeleteColabAsync(int id)
         {

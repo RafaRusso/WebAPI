@@ -38,17 +38,13 @@ namespace Core.Domain
         /// </summary>
         public string Status { get; set; }
         /// <summary>
-        /// ID do departamento que o colaborador participa:
+        /// ID do departamento que o colaborador participa
         /// </summary>
-        public int DepartamentoId { get; set; }
-        //Relacionamento Dep-Colab
-        //public Departamento Departamento { get; set; }
+        public ICollection<Departamento> Departamentos { get; set; }
         /// <summary>
-        /// ID do grupo que o colaborador participa:
+        /// ID do grupo que o colaborador participa
         /// </summary>
-        public int GrupoId { get; set; }
-        //Relacionamento Grupo-Colab
-        //public Grupo Grupo { get; set; }
+        public ICollection<Grupo> Grupos { get; set; }
         /// <summary>
         /// Social Media:
         /// </summary>

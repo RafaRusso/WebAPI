@@ -9,6 +9,7 @@ namespace Manager.Interfaces
 {
     public interface IDepartamentoRepository
     {
+        Task<bool> ExisteAsync(int id);
         Task DeleteDepartamentoAsync(int id);
         Task<Departamento> GetDepartamentoAsync(int id);
         Task<IEnumerable<Departamento>> GetDepartamentosAsync();
