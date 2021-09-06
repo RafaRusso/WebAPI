@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Dominio.Models;
+using Core.Domain;
 
-namespace Repositorio.Data
+namespace Data.Context
 {
     public class ColabDBContext : DbContext
     {

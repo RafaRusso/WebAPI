@@ -11,7 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Repositorio.Data;
+using Data.Context;
+using Data.Repository;
+using Manager.Interfaces;
+using Manager.Implementation;
 
 namespace Dominio
 {
@@ -27,6 +30,12 @@ namespace Dominio
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IColabRepository, ColabRepository>();
+            services.AddScoped<IColabManager, ColabManager>();
+            services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
+            services.AddScoped<IDepartamentoManager, DepartamentoManager>();
+            services.AddScoped<IGrupoRepository, GrupoRepository>();
+            services.AddScoped<IGrupoManager, GrupoManager>();
             services.AddDbContext<ColabDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DataContext")));
             services.AddControllers();
             services.AddSwaggerGen(c =>

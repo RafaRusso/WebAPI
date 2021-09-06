@@ -6,14 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dominio.Models
+namespace Core.Domain
 {
-    public class Departamento
+    public class Grupo
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Colab> Colaboradores { get; set; }
-
     }
 }

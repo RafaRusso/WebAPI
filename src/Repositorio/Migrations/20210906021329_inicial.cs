@@ -44,12 +44,10 @@ namespace Repositorio.Migrations
                     Idade = table.Column<string>(type: "text", nullable: true),
                     Senha = table.Column<string>(type: "text", nullable: true),
                     Status = table.Column<string>(type: "text", nullable: true),
-                    DepartamentoColab = table.Column<int>(type: "integer", nullable: false),
-                    GrupoColab = table.Column<int>(type: "integer", nullable: false),
+                    DepartamentoId = table.Column<int>(type: "integer", nullable: false),
+                    GrupoId = table.Column<int>(type: "integer", nullable: false),
                     SocialMedia = table.Column<string>(type: "text", nullable: true),
-                    Descricao = table.Column<string>(type: "text", nullable: true),
-                    DepartamentoId = table.Column<int>(type: "integer", nullable: true),
-                    GrupoId = table.Column<int>(type: "integer", nullable: true)
+                    Descricao = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,13 +57,13 @@ namespace Repositorio.Migrations
                         column: x => x.DepartamentoId,
                         principalTable: "Departamentos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Colabs_Grupos_GrupoId",
                         column: x => x.GrupoId,
                         principalTable: "Grupos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
