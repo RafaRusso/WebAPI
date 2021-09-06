@@ -27,7 +27,7 @@ namespace Data.Repository
             return await context.Grupos.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        //inset
+        //insert
         public async Task<Grupo> InsertGrupoAsync(Grupo grupo)
         {
             await context.Grupos.AddAsync(grupo);

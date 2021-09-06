@@ -13,6 +13,5 @@ namespace Core.Domain
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Colab> Colabs { get; set; }
-
     }
 }

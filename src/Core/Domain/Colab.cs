@@ -41,11 +41,11 @@ namespace Core.Domain
         /// <summary>
         /// ID do departamento que o colaborador participa
         /// </summary>
-        public ICollection<Departamento> Departamentos { get; }
+        public ICollection<Departamento> Departamentos { get; set; }
         /// <summary>
         /// ID do grupo que o colaborador participa
         /// </summary>
-        public ICollection<Grupo> Grupos { get;  }
+        public ICollection<Grupo> Grupos { get; set; }
         /// <summary>
         /// Social Media:
         /// </summary>

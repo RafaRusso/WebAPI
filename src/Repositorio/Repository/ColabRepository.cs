@@ -19,36 +19,81 @@ namespace Data.Repository
         }
         public async Task<IEnumerable<Colab>> GetColabsAsync()
         {
-            return await context.Colabs.AsNoTracking().ToListAsync();
+            return await context.Colabs.Include(p =>p.Departamentos).Include(p=>p.Grupos).AsNoTracking().ToListAsync();
         }
 
         public async Task<Colab> GetColabAsync(int id)
         {
-            return await context.Colabs.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
+            return await context.Colabs.AsNoTracking().Include(p => p.Departamentos).Include(p => p.Grupos).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         //insert
         public async Task<Colab> InsertColabAsync(Colab colab)
         {
+
+            await InsertColabDepartamento(colab);
+            await InsertColabGrupo(colab);
             await context.Colabs.AddAsync(colab);
             await context.SaveChangesAsync();
             return colab;
         }
 
-        
+        private async Task InsertColabGrupo(Colab colab)
+        {
+            var gruposConsultados = new List<Grupo>();
+            foreach (var grupo in colab.Grupos)
+            {
+                var grupoConsultado = await context.Grupos.FindAsync(grupo.Id);
+                gruposConsultados.Add(grupoConsultado);
+            }
+            colab.Grupos = gruposConsultados;
+        }
+
+        private async Task InsertColabDepartamento(Colab colab)
+        {
+            var departamentosConsultados = new List<Departamento>();
+            foreach (var departamento in colab.Departamentos)
+            {
+                var departamentoConsultado = await context.Departamentos.FindAsync(departamento.Id);
+                departamentosConsultados.Add(departamentoConsultado);
+            }
+            colab.Departamentos = departamentosConsultados;
+        }
+
+
         //update
         public async Task<Colab> UpdateColabAsync(Colab colab)
         {
-            var colabConsultado = await context.Colabs.SingleOrDefaultAsync(p => p.Id == colab.Id);
+            var colabConsultado = await context.Colabs
+                                        .Include(p => p.Departamentos)
+                                        .Include(p => p.Grupos)
+                                        .SingleOrDefaultAsync(p => p.Id == colab.Id);
             if (colabConsultado == null)
             {
                 return null;
             }
             context.Entry(colabConsultado).CurrentValues.SetValues(colab);
+            await UpdateColabDepartamentoGrupo(colab, colabConsultado);
             await context.SaveChangesAsync();
             return colabConsultado;
         }
-        
+
+        private async Task UpdateColabDepartamentoGrupo(Colab colab, Colab colabConsultado)
+        {
+            colabConsultado.Departamentos.Clear();
+            colabConsultado.Grupos.Clear();
+            foreach (var departamento in colab.Departamentos)
+            {
+                var departamentoConsultado = await context.Departamentos.FindAsync(departamento.Id);
+                colabConsultado.Departamentos.Add(departamentoConsultado);
+            }
+            foreach (var grupo in colab.Grupos)
+            {
+                var grupoConsultado = await context.Grupos.FindAsync(grupo.Id);
+                colabConsultado.Grupos.Add(grupoConsultado);
+            }
+        }
+
         //delete
         public async Task DeleteColabAsync(int id)
         {
