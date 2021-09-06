@@ -16,6 +16,7 @@ namespace Core.Domain
         /// <summary>
         /// ID do colaborador.
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         /// <summary>
         /// Nome do cliente.
@@ -40,11 +41,11 @@ namespace Core.Domain
         /// <summary>
         /// ID do departamento que o colaborador participa
         /// </summary>
-        public ICollection<Departamento> Departamentos { get; set; }
+        public ICollection<Departamento> Departamentos { get; }
         /// <summary>
         /// ID do grupo que o colaborador participa
         /// </summary>
-        public ICollection<Grupo> Grupos { get; set; }
+        public ICollection<Grupo> Grupos { get;  }
         /// <summary>
         /// Social Media:
         /// </summary>

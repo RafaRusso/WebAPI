@@ -20,7 +20,7 @@
             <summary>
             Inclui um colaborador no banco de dados
             </summary>
-            <param name="novoColab"></param>
+            <param name="colab"></param>
             <returns></returns>
         </member>
         <member name="M:ColabAPI.Controllers.ColabsController.Put(Core.Shared.ModelViews.Colab.AlteraColab)">

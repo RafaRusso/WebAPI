@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(ColabDBContext))]
-    [Migration("20210906113250_many-2-many3")]
-    partial class many2many3
+    [Migration("20210906192159_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,13 +22,13 @@ namespace Data.Migrations
 
             modelBuilder.Entity("ColabDepartamento", b =>
                 {
-                    b.Property<int>("ColaboradoresId")
+                    b.Property<int>("ColabsId")
                         .HasColumnType("integer");
 
                     b.Property<int>("DepartamentosId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ColaboradoresId", "DepartamentosId");
+                    b.HasKey("ColabsId", "DepartamentosId");
 
                     b.HasIndex("DepartamentosId");
 
@@ -37,13 +37,13 @@ namespace Data.Migrations
 
             modelBuilder.Entity("ColabGrupo", b =>
                 {
-                    b.Property<int>("ColaboradoresId")
+                    b.Property<int>("ColabsId")
                         .HasColumnType("integer");
 
                     b.Property<int>("GruposId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ColaboradoresId", "GruposId");
+                    b.HasKey("ColabsId", "GruposId");
 
                     b.HasIndex("GruposId");
 
@@ -117,7 +117,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("Core.Domain.Colab", null)
                         .WithMany()
-                        .HasForeignKey("ColaboradoresId")
+                        .HasForeignKey("ColabsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -132,7 +132,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("Core.Domain.Colab", null)
                         .WithMany()
-                        .HasForeignKey("ColaboradoresId")
+                        .HasForeignKey("ColabsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

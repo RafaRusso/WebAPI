@@ -19,14 +19,14 @@ namespace Manager.Implementation
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<Colab>> GetColabsAsync()
+        public async Task<IEnumerable<ColabView>> GetColabsAsync()
         {
-            return await colabRepository.GetColabsAsync();
+            return mapper.Map<IEnumerable<Colab>,IEnumerable<ColabView>>(await colabRepository.GetColabsAsync());
         }
 
-        public async Task<Colab> GetColabAsync(int id)
+        public async Task<ColabView> GetColabAsync(int id)
         {
-            return await colabRepository.GetColabAsync(id);
+            return mapper.Map < ColabView > (await colabRepository.GetColabAsync(id));
         }
 
         public async Task DeleteColabAsync(int id)
@@ -34,16 +34,16 @@ namespace Manager.Implementation
             await colabRepository.DeleteColabAsync(id);
         }
 
-        public async Task<Colab> InsertColabAsync(NovoColab novoColab)
+        public async Task<ColabView> InsertColabAsync(NovoColab novoColab)
         {
             var colab = mapper.Map<Colab>(novoColab);
-            return await colabRepository.InsertColabAsync(colab);
+            return mapper.Map<ColabView>(await colabRepository.InsertColabAsync(colab));
         }
 
-        public async Task<Colab> UpdateColabAsync(AlteraColab alteraColab)
+        public async Task<ColabView> UpdateColabAsync(AlteraColab alteraColab)
         {
             var colab = mapper.Map<Colab>(alteraColab);
-            return await colabRepository.UpdateColabAsync(colab);
+            return mapper.Map < ColabView >(await colabRepository.UpdateColabAsync(colab));
         }
     }
 }

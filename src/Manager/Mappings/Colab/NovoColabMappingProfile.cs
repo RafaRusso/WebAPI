@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Domain;
 using Core.Shared.ModelViews;
+using Core.Shared.ModelViews.Colab;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Manager.Mappings
         public NovoColabMappingProfile()
         {
             CreateMap<Colab, NovoColab>().ReverseMap();
+            CreateMap<Colab, ColabView>();
         }
     }
 }

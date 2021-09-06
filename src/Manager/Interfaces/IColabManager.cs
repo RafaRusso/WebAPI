@@ -12,9 +12,9 @@ namespace Manager.Interfaces
     public interface IColabManager
     {
         Task DeleteColabAsync(int id);
-        Task<Colab> GetColabAsync(int id);
-        Task<IEnumerable<Colab>> GetColabsAsync();
-        Task<Colab> InsertColabAsync(NovoColab colabNovo);
-        Task<Colab> UpdateColabAsync(AlteraColab alteraColab);
+        Task<ColabView> GetColabAsync(int id);
+        Task<IEnumerable<ColabView>> GetColabsAsync();
+        Task<ColabView> InsertColabAsync(NovoColab colabNovo);
+        Task<ColabView> UpdateColabAsync(AlteraColab alteraColab);
     }
 }

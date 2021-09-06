@@ -56,15 +56,15 @@ namespace Data.Migrations
                 name: "ColabDepartamento",
                 columns: table => new
                 {
-                    ColaboradoresId = table.Column<int>(type: "integer", nullable: false),
+                    ColabsId = table.Column<int>(type: "integer", nullable: false),
                     DepartamentosId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ColabDepartamento", x => new { x.ColaboradoresId, x.DepartamentosId });
+                    table.PrimaryKey("PK_ColabDepartamento", x => new { x.ColabsId, x.DepartamentosId });
                     table.ForeignKey(
-                        name: "FK_ColabDepartamento_Colabs_ColaboradoresId",
-                        column: x => x.ColaboradoresId,
+                        name: "FK_ColabDepartamento_Colabs_ColabsId",
+                        column: x => x.ColabsId,
                         principalTable: "Colabs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -80,15 +80,15 @@ namespace Data.Migrations
                 name: "ColabGrupo",
                 columns: table => new
                 {
-                    ColaboradoresId = table.Column<int>(type: "integer", nullable: false),
+                    ColabsId = table.Column<int>(type: "integer", nullable: false),
                     GruposId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ColabGrupo", x => new { x.ColaboradoresId, x.GruposId });
+                    table.PrimaryKey("PK_ColabGrupo", x => new { x.ColabsId, x.GruposId });
                     table.ForeignKey(
-                        name: "FK_ColabGrupo_Colabs_ColaboradoresId",
-                        column: x => x.ColaboradoresId,
+                        name: "FK_ColabGrupo_Colabs_ColabsId",
+                        column: x => x.ColabsId,
                         principalTable: "Colabs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
