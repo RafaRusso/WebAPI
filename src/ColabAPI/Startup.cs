@@ -15,6 +15,9 @@ using Data.Context;
 using Data.Repository;
 using Manager.Interfaces;
 using Manager.Implementation;
+using FluentValidation.AspNetCore;
+using Manager.Validator;
+using System.Globalization;
 
 namespace Dominio
 {
@@ -37,7 +40,12 @@ namespace Dominio
             services.AddScoped<IGrupoRepository, GrupoRepository>();
             services.AddScoped<IGrupoManager, GrupoManager>();
             services.AddDbContext<ColabDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DataContext")));
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(p => 
+                { 
+                    p.RegisterValidatorsFromAssemblyContaining<ColabValidator>();
+                    p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ColabAPI", Version = "v1" });
