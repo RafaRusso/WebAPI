@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ColabAPI</name>
+    </assembly>
+    <members>
+        <member name="M:ColabAPI.Controllers.ColabsController.Get">
+            <summary>
+            Retorna todos os colaboradores cadastrados
+            </summary>
+        </member>
+        <member name="M:ColabAPI.Controllers.ColabsController.Get(System.Int32)">
+            <summary>
+            Retorna um colaborador consultado via id
+            </summary>
+            <param name="id">Id do colaborador</param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.ColabsController.Post(Core.Domain.Colab)">
+            <summary>
+            Inclui um colaborador no banco de dados
+            </summary>
+            <param name="colab"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.ColabsController.Put(Core.Domain.Colab)">
+            <summary>
+            Altera um colaborador
+            </summary>
+            <param name="colab"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.ColabsController.Delete(System.Int32)">
+            <summary>
+            Exclui um colaborador
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.DepartamentosController.Get">
+            <summary>
+            Retorna todos os departamentos cadastrados
+            </summary>
+        </member>
+        <member name="M:ColabAPI.Controllers.DepartamentosController.Get(System.Int32)">
+            <summary>
+            retorna um departamendo via ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.DepartamentosController.Post(Core.Domain.Departamento)">
+            <summary>
+            inclui um departamento
+            </summary>
+            <param name="departamento"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.DepartamentosController.Put(Core.Domain.Departamento)">
+            <summary>
+            altera um departamento
+            </summary>
+            <param name="departamento"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.DepartamentosController.Delete(System.Int32)">
+            <summary>
+            Exclui um departamento do banco de dados
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.GruposController.Get">
+            <summary>
+            Retorna todos os grupos cadastrados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.GruposController.Get(System.Int32)">
+            <summary>
+            Retorna um grupo via Id.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.GruposController.Post(Core.Domain.Grupo)">
+            <summary>
+            Inclui um grupo no banco de dados.
+            </summary>
+            <param name="grupo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.GruposController.Put(Core.Domain.Grupo)">
+            <summary>
+            Altera um banco de dados cadastrado.
+            </summary>
+            <param name="grupo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ColabAPI.Controllers.GruposController.Delete(System.Int32)">
+            <summary>
+            Exclui um grupo do banco de dados.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

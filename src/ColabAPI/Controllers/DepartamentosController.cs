@@ -19,29 +19,43 @@ namespace ColabAPI.Controllers
         {
             this.departamentoManager = departamentoManager;
         }
-        // GET: api/<DepartamentoController>
+        /// <summary>
+        /// Retorna todos os departamentos cadastrados
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             return Ok(await departamentoManager.GetDepartamentosAsync());
         }
 
-        // GET api/<DepartamentoController>/5
+        /// <summary>
+        /// retorna um departamendo via ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await departamentoManager.GetDepartamentoAsync(id));
         }
 
-        // POST api/<DepartamentoController>
+        /// <summary>
+        /// inclui um departamento
+        /// </summary>
+        /// <param name="departamento"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Departamento>> Post(Departamento departamento)
+        public async Task<IActionResult> Post(Departamento departamento)
         {
             var departamentoInserido = await departamentoManager.InsertDepartamentoAsync(departamento);
             return CreatedAtAction(nameof(Get), new { id = departamento.Id }, departamento);
         }
 
-        // PUT api/<DepartamentoController>/5
+        /// <summary>
+        /// altera um departamento
+        /// </summary>
+        /// <param name="departamento"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Departamento departamento)
         {
@@ -53,7 +67,11 @@ namespace ColabAPI.Controllers
             return Ok(departamentoAtualizado);
         }
 
-        // DELETE api/<DepartamentoController>/5
+        /// <summary>
+        /// Exclui um departamento do banco de dados
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

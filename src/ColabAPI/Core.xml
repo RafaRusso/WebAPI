@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Core</name>
+    </assembly>
+    <members>
+        <member name="T:Core.Domain.Colab">
+            <summary>
+            Objeto utilizado para novo colaborador.
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.Id">
+            <summary>
+            ID do colaborador.
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.Name">
+            <summary>
+            Nome do cliente.
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.Email">
+            <summary>
+            Email do Colaborador
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.Idade">
+            <summary>
+            Idade do colaborador
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.Senha">
+            <summary>
+            Senha:
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.Status">
+            <summary>
+            Status:
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.DepartamentoId">
+            <summary>
+            ID do departamento que o colaborador participa:
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.GrupoId">
+            <summary>
+            ID do grupo que o colaborador participa:
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.SocialMedia">
+            <summary>
+            Social Media:
+            </summary>
+        </member>
+        <member name="P:Core.Domain.Colab.Descricao">
+            <summary>
+            Descrição:
+            </summary>
+        </member>
+    </members>
+</doc>

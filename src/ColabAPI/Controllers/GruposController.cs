@@ -20,29 +20,44 @@ namespace ColabAPI.Controllers
         {
             this.grupoManager = grupoManager;
         }
-        // GET: api/<GrupoController>
+        /// <summary>
+        /// Retorna todos os grupos cadastrados
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             return Ok(await grupoManager.GetGruposAsync());
         }
 
-        // GET api/<GrupoController>/5
+        /// <summary>
+        /// Retorna um grupo via Id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await grupoManager.GetGrupoAsync(id));
         }
 
-        // POST api/<GrupoController>
+        /// <summary>
+        /// Inclui um grupo no banco de dados.
+        /// </summary>
+        /// <param name="grupo"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Grupo>> Post(Grupo grupo)
+        public async Task<IActionResult> Post(Grupo grupo)
         {
             var grupoInserido = await grupoManager.InsertGrupoAsync(grupo);
             return CreatedAtAction(nameof(Get), new { id = grupo.Id }, grupo);
         }
 
-        // PUT api/<GrupoController>/5
+        /// <summary>
+        /// Altera um banco de dados cadastrado.
+        /// </summary>
+        /// <param name="grupo"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Grupo grupo)
         {
@@ -54,7 +69,11 @@ namespace ColabAPI.Controllers
             return Ok(grupoAtualizado);
         }
 
-        // DELETE api/<GrupoController>/5
+        /// <summary>
+        /// Exclui um grupo do banco de dados.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

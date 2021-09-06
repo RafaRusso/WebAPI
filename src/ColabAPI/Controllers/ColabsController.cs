@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Core.Domain;
-using Data.Context;
 using Manager.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace ColabAPI.Controllers
 {
@@ -21,31 +19,55 @@ namespace ColabAPI.Controllers
             this.colabManager = colabManager;
         }
 
-        // GET: api/Colabs
+        /// <summary>
+        /// Retorna todos os colaboradores cadastrados
+        /// </summary>
         [HttpGet]
-        public async Task<ActionResult> Get()
+        [ProducesResponseType(typeof(Colab),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails),StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Get()
         {
             return Ok(await colabManager.GetColabsAsync());
         }
 
-        // GET: api/Colabs/5
+        /// <summary>
+        /// Retorna um colaborador consultado via id
+        /// </summary>
+        /// <param name="id">Id do colaborador</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Colab), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await colabManager.GetColabAsync(id));
         }
 
-        // POST: api/Colabs
+        /// <summary>
+        /// Inclui um colaborador no banco de dados
+        /// </summary>
+        /// <param name="colab"></param>
+        /// <returns></returns>
 
         [HttpPost]
-        public async Task<ActionResult<Colab>> Post(Colab colab)
+        [ProducesResponseType(typeof(Colab),StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Post(Colab colab)
         {
             var colabInserido = await colabManager.InsertColabAsync(colab);
             return CreatedAtAction(nameof(Get), new { id = colab.Id }, colab);
         }
 
-        // PUT: api/Colabs/5
+        /// <summary>
+        /// Altera um colaborador
+        /// </summary>
+        /// <param name="colab"></param>
+        /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType(typeof(Colab), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put(Colab colab)
         {
             var colabAtualizado = await colabManager.UpdateColabAsync(colab);
@@ -56,8 +78,15 @@ namespace ColabAPI.Controllers
             return Ok(colabAtualizado);
         }
 
-        // DELETE: api/Colabs/5
+        /// <summary>
+        /// Exclui um colaborador
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Colab), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
             await colabManager.DeleteColabAsync(id);

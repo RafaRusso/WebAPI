@@ -18,6 +18,7 @@ using Manager.Implementation;
 using FluentValidation.AspNetCore;
 using Manager.Validator;
 using System.Globalization;
+using ColabAPI.Configuration;
 
 namespace Dominio
 {
@@ -33,23 +34,12 @@ namespace Dominio
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IColabRepository, ColabRepository>();
-            services.AddScoped<IColabManager, ColabManager>();
-            services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
-            services.AddScoped<IDepartamentoManager, DepartamentoManager>();
-            services.AddScoped<IGrupoRepository, GrupoRepository>();
-            services.AddScoped<IGrupoManager, GrupoManager>();
-            services.AddDbContext<ColabDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DataContext")));
-            services.AddControllers()
-                .AddFluentValidation(p => 
-                { 
-                    p.RegisterValidatorsFromAssemblyContaining<ColabValidator>();
-                    p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
-                });
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ColabAPI", Version = "v1" });
-            });
+            
+            services.AddControllers();
+            services.AddFluentValidationConfiguration();
+            services.AddDataBaseConfiguration(Configuration);
+            services.AddDependencyInjectionConfig();
+            services.AddSwaggerConfiguration();
         }   
 
 
@@ -61,9 +51,10 @@ namespace Dominio
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ColabAPI v1"));
+                
             }
+
+            app.UseSwaggerConfiguration();
 
             app.UseRouting();
 
