@@ -8,7 +8,6 @@ namespace Core.Shared.ModelViews
 {
     public class NovoDepartamento
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

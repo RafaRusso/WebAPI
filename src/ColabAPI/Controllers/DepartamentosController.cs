@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.Shared.ModelViews;
 using Manager.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ColabAPI.Controllers
 {
@@ -42,24 +42,24 @@ namespace ColabAPI.Controllers
         /// <summary>
         /// inclui um departamento
         /// </summary>
-        /// <param name="departamento"></param>
+        /// <param name="novoDepartamento"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post(Departamento departamento)
+        public async Task<IActionResult> Post(NovoDepartamento novoDepartamento)
         {
-            var departamentoInserido = await departamentoManager.InsertDepartamentoAsync(departamento);
-            return CreatedAtAction(nameof(Get), new { id = departamento.Id }, departamento);
+            var departamentoInserido = await departamentoManager.InsertDepartamentoAsync(novoDepartamento);
+            return CreatedAtAction(nameof(Get), new { id = departamentoInserido.Id }, departamentoInserido);
         }
 
         /// <summary>
         /// altera um departamento
         /// </summary>
-        /// <param name="departamento"></param>
+        /// <param name="alteraDepartamento"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Departamento departamento)
+        [HttpPut]
+        public async Task<IActionResult> Put(AlteraDepartamento alteraDepartamento)
         {
-            var departamentoAtualizado = await departamentoManager.UpdateDepartamentoAsync(departamento);
+            var departamentoAtualizado = await departamentoManager.UpdateDepartamentoAsync(alteraDepartamento);
             if (departamentoAtualizado == null)
             {
                 return NotFound();

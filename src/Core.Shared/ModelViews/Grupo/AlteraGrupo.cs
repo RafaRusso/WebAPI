@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Core.Shared.ModelViews
 {
-    public class NovoGrupo
+    public class AlteraGrupo : NovoGrupo
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
     }
 }

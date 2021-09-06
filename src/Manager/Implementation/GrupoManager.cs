@@ -1,4 +1,6 @@
-﻿using Core.Domain;
+﻿using AutoMapper;
+using Core.Domain;
+using Core.Shared.ModelViews;
 using Manager.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,11 @@ namespace Manager.Implementation
     public class GrupoManager : IGrupoManager
     {
         private readonly IGrupoRepository grupoRepository;
+        private readonly IMapper mapper;
 
-        public GrupoManager(IGrupoRepository grupoRepository)
+        public GrupoManager(IGrupoRepository grupoRepository, IMapper mapper)
         {
+            this.mapper = mapper;
             this.grupoRepository = grupoRepository;
         }
         public async Task DeleteGrupoAsync(int id)
@@ -31,13 +35,15 @@ namespace Manager.Implementation
             return await grupoRepository.GetGruposAsync();
         }
 
-        public async Task<Grupo> InsertGrupoAsync(Grupo grupo)
+        public async Task<Grupo> InsertGrupoAsync(NovoGrupo novoGrupo)
         {
+            var grupo = mapper.Map<Grupo>(novoGrupo);
             return await grupoRepository.InsertGrupoAsync(grupo);
         }
 
-        public async Task<Grupo> UpdateGrupoAsync(Grupo grupo)
+        public async Task<Grupo> UpdateGrupoAsync(AlteraGrupo alteraGrupo)
         {
+            var grupo = mapper.Map<Grupo>(alteraGrupo);
             return await grupoRepository.UpdateGrupoAsync(grupo);
         }
     }

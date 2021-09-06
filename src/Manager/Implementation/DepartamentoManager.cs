@@ -1,4 +1,6 @@
-﻿using Core.Domain;
+﻿using AutoMapper;
+using Core.Domain;
+using Core.Shared.ModelViews;
 using Manager.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,11 @@ namespace Manager.Implementation
     public class DepartamentoManager : IDepartamentoManager
     {
         private readonly IDepartamentoRepository departamentoRepository;
+        private readonly IMapper mapper;
 
-        public DepartamentoManager(IDepartamentoRepository departamentoRepository)
+        public DepartamentoManager(IDepartamentoRepository departamentoRepository, IMapper mapper)
         {
+            this.mapper = mapper;
             this.departamentoRepository = departamentoRepository;
         }
         public async Task DeleteDepartamentoAsync(int id)
@@ -32,13 +36,15 @@ namespace Manager.Implementation
             return await departamentoRepository.GetDepartamentoAsync(id);
         }
 
-        public async Task<Departamento> InsertDepartamentoAsync(Departamento departamento)
+        public async Task<Departamento> InsertDepartamentoAsync(NovoDepartamento novoDepartamento)
         {
+            var departamento = mapper.Map<Departamento>(novoDepartamento);
             return await departamentoRepository.InsertDepartamentoAsync(departamento);
         }
 
-        public async Task<Departamento> UpdateDepartamentoAsync(Departamento departamento)
+        public async Task<Departamento> UpdateDepartamentoAsync(AlteraDepartamento alteraDepartamento)
         {
+            var departamento = mapper.Map<Departamento>(alteraDepartamento);
             return await departamentoRepository.UpdateDepartamentoAsync(departamento);
         }
     }

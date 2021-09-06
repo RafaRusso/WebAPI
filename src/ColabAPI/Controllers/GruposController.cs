@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Core.Domain;
 using Manager.Interfaces;
 using Manager.Implementation;
+using Core.Shared.ModelViews;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -44,24 +45,24 @@ namespace ColabAPI.Controllers
         /// <summary>
         /// Inclui um grupo no banco de dados.
         /// </summary>
-        /// <param name="grupo"></param>
+        /// <param name="novoGrupo"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post(Grupo grupo)
+        public async Task<IActionResult> Post(NovoGrupo novoGrupo)
         {
-            var grupoInserido = await grupoManager.InsertGrupoAsync(grupo);
-            return CreatedAtAction(nameof(Get), new { id = grupo.Id }, grupo);
+            var grupoInserido = await grupoManager.InsertGrupoAsync(novoGrupo);
+            return CreatedAtAction(nameof(Get), new { id = grupoInserido.Id }, grupoInserido);
         }
 
         /// <summary>
         /// Altera um banco de dados cadastrado.
         /// </summary>
-        /// <param name="grupo"></param>
+        /// <param name="alteraGrupo"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Grupo grupo)
+        public async Task<IActionResult> Put(AlteraGrupo alteraGrupo)
         {
-            var grupoAtualizado = await grupoManager.UpdateGrupoAsync(grupo);
+            var grupoAtualizado = await grupoManager.UpdateGrupoAsync(alteraGrupo);
             if (grupoAtualizado == null)
             {
                 return NotFound();

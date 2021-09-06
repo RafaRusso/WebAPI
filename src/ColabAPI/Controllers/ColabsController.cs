@@ -49,22 +49,22 @@ namespace ColabAPI.Controllers
         /// <summary>
         /// Inclui um colaborador no banco de dados
         /// </summary>
-        /// <param name="colabView"></param>
+        /// <param name="novoColab"></param>
         /// <returns></returns>
 
         [HttpPost]
         [ProducesResponseType(typeof(Colab),StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post(NovoColab colabView)
+        public async Task<IActionResult> Post(NovoColab novoColab)
         {
-            var colabInserido = await colabManager.InsertColabAsync(colabView);
+            var colabInserido = await colabManager.InsertColabAsync(novoColab);
             return CreatedAtAction(nameof(Get), new { id = colabInserido.Id }, colabInserido);
         }
 
         /// <summary>
         /// Altera um colaborador
         /// </summary>
-        /// <param name="colab"></param>
+        /// <param name="alteraColab"></param>
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(typeof(Colab), StatusCodes.Status200OK)]

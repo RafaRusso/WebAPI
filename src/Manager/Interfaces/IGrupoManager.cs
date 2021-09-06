@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.Shared.ModelViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Manager.Interfaces
         Task DeleteGrupoAsync(int id);
         Task<Grupo> GetGrupoAsync(int id);
         Task<IEnumerable<Grupo>> GetGruposAsync();
-        Task<Grupo> InsertGrupoAsync(Grupo grupo);
-        Task<Grupo> UpdateGrupoAsync(Grupo grupo);
+        Task<Grupo> InsertGrupoAsync(NovoGrupo novoGrupo);
+        Task<Grupo> UpdateGrupoAsync(AlteraGrupo alteraGrupo);
     }
 }
