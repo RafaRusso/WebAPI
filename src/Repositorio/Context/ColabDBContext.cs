@@ -22,11 +22,11 @@ namespace Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Departamento>()
-                .HasMany(p => p.Colaboradores)
+                .HasMany(p => p.Colabs)
                 .WithMany(p =>p.Departamentos)
                 .UsingEntity(j => j.ToTable("ColabDepartamento"));
             modelBuilder.Entity<Grupo>()
-                .HasMany(p => p.Colaboradores)
+                .HasMany(p => p.Colabs)
                 .WithMany(p => p.Grupos)
                 .UsingEntity(j => j.ToTable("ColabGrupo"));
         }

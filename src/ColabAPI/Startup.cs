@@ -4,22 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Data.Context;
-using Data.Repository;
-using Manager.Interfaces;
-using Manager.Implementation;
-using FluentValidation.AspNetCore;
-using Manager.Validator;
-using System.Globalization;
 using ColabAPI.Configuration;
+using Manager.Mappings;
 using System.Text.Json.Serialization;
+using System;
 
 namespace Dominio
 {
@@ -37,6 +25,8 @@ namespace Dominio
         {
 
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(NovoColabMappingProfile), typeof(AlteraColabMappingProfile));
             services.AddFluentValidationConfiguration();
             services.AddDataBaseConfiguration(Configuration);
             services.AddDependencyInjectionConfig();

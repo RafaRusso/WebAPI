@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Core.Domain;
 using Manager.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Core.Shared.ModelViews;
+using Core.Shared.ModelViews.Colab;
 
 namespace ColabAPI.Controllers
 {
@@ -47,16 +49,16 @@ namespace ColabAPI.Controllers
         /// <summary>
         /// Inclui um colaborador no banco de dados
         /// </summary>
-        /// <param name="colab"></param>
+        /// <param name="colabView"></param>
         /// <returns></returns>
 
         [HttpPost]
         [ProducesResponseType(typeof(Colab),StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post(Colab colab)
+        public async Task<IActionResult> Post(NovoColab colabView)
         {
-            var colabInserido = await colabManager.InsertColabAsync(colab);
-            return CreatedAtAction(nameof(Get), new { id = colab.Id }, colab);
+            var colabInserido = await colabManager.InsertColabAsync(colabView);
+            return CreatedAtAction(nameof(Get), new { id = colabInserido.Id }, colabInserido);
         }
 
         /// <summary>
@@ -68,9 +70,9 @@ namespace ColabAPI.Controllers
         [ProducesResponseType(typeof(Colab), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Put(Colab colab)
+        public async Task<IActionResult> Put(AlteraColab alteraColab)
         {
-            var colabAtualizado = await colabManager.UpdateColabAsync(colab);
+            var colabAtualizado = await colabManager.UpdateColabAsync(alteraColab); ;
             if (colabAtualizado == null)
             {
                 return NotFound();

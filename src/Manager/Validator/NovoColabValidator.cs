@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using Core.Shared.ModelViews;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Manager.Validator
 {
-    public class ColabValidator : AbstractValidator<Colab>
+    public class NovoColabValidator : AbstractValidator<NovoColab>
     {
-        public ColabValidator()
+        public NovoColabValidator()
         {
             RuleFor(x => x.Name).NotNull().NotEmpty();
             RuleFor(x => x.Idade).NotNull().NotEmpty().GreaterThanOrEqualTo(16);

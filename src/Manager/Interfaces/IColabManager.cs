@@ -1,4 +1,6 @@
 ﻿using Core.Domain;
+using Core.Shared.ModelViews;
+using Core.Shared.ModelViews.Colab;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,7 @@ namespace Manager.Interfaces
         Task DeleteColabAsync(int id);
         Task<Colab> GetColabAsync(int id);
         Task<IEnumerable<Colab>> GetColabsAsync();
-        Task<Colab> InsertColabAsync(Colab colab);
-        Task<Colab> UpdateColabAsync(Colab colab);
+        Task<Colab> InsertColabAsync(NovoColab colabNovo);
+        Task<Colab> UpdateColabAsync(AlteraColab alteraColab);
     }
 }

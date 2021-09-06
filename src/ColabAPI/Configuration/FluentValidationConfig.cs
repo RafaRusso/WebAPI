@@ -16,7 +16,8 @@ namespace ColabAPI.Configuration
             services.AddControllers()
                 .AddFluentValidation(p =>
                 {
-                    p.RegisterValidatorsFromAssemblyContaining<ColabValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<NovoColabValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<AlteraColabValidator>();
                     p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
                 });
         }

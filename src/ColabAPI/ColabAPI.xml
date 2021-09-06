@@ -16,14 +16,14 @@
             <param name="id">Id do colaborador</param>
             <returns></returns>
         </member>
-        <member name="M:ColabAPI.Controllers.ColabsController.Post(Core.Domain.Colab)">
+        <member name="M:ColabAPI.Controllers.ColabsController.Post(Core.Shared.ModelViews.NovoColab)">
             <summary>
             Inclui um colaborador no banco de dados
             </summary>
-            <param name="colab"></param>
+            <param name="colabView"></param>
             <returns></returns>
         </member>
-        <member name="M:ColabAPI.Controllers.ColabsController.Put(Core.Domain.Colab)">
+        <member name="M:ColabAPI.Controllers.ColabsController.Put(Core.Shared.ModelViews.Colab.AlteraColab)">
             <summary>
             Altera um colaborador
             </summary>
